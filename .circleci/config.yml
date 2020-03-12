@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
-  aws-s3: circleci/aws-s3@1.0.15
 jobs:
   build-and-deploy:
     executor:
@@ -12,6 +11,8 @@ jobs:
           steps:
             - run: npm install
             - run: npm run build
+            - run: apk add --update python python-dev py-pip build-base
+            - run: pip install awscli
             - run: npm run deploy
 workflows:
   build-and-deploy:
