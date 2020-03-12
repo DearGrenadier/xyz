@@ -1,20 +1,33 @@
 version: 2.1
 orbs:
-  node: circleci/node@1.1.6
+  aws-s3: circleci/aws-s3@1.0.11
 jobs:
-  build-and-deploy:
-    executor:
-      name: node/default
+  build:
+    docker:
+      - image: circleci/node:13.0.1
+    working_directory: ~/repo
+
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm run build
-            - run: sudo apt-get update && sudo apt-get install python3-pip
-            - run: pip install awscli
-            - run: npm run deploy
-workflows:
-  build-and-deploy:
-    jobs:
-      - build-and-deploy
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm run build
+      
+      - aws-s3/sync:
+          from: build
+          to: 's3://nazarchuk.dev/'
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=86400"
+          overwrite: true
