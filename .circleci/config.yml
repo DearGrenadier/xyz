@@ -11,7 +11,7 @@ jobs:
           steps:
             - run: npm install
             - run: npm run build
-            - run: sudo apt-get update && sudo apt-get install python python-dev py-pip build-base
+            - run: sudo apt-get update && sudo apt-get install python3-pip
             - run: pip install awscli
             - run: npm run deploy
 workflows:
