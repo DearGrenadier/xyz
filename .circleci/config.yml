@@ -1,8 +1,9 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
+  aws-s3: circleci/aws-s3@1.0.15
 jobs:
-  build-and-test:
+  build-and-deploy:
     executor:
       name: node/default
     steps:
@@ -10,8 +11,9 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-            - run: npm test
+            - run: npm run build
+            - run: npm run deploy
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  build-and-deploy:
+    jobs:
+      - build-and-deploy
