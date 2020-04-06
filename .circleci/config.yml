@@ -23,7 +23,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm run build
-      
+
       - aws-s3/sync:
           from: build
           to: 's3://nazarchuk.dev/'
