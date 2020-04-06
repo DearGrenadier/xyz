@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js'
+import {
+  EditorState, RichUtils, convertToRaw, convertFromRaw
+} from 'draft-js'
 import Editor from 'draft-js-plugins-editor'
-import createImagePlugin from 'draft-js-image-plugin'
+
 import styled from 'styled-components'
 import {
   Icon, Button
-} from "@blueprintjs/core"
+} from '@blueprintjs/core'
 
 import './styles.css'
 
@@ -23,7 +25,9 @@ const plugins = [
 const TextEditor = () => {
   const content = window.localStorage.getItem('content')
 
-  const initialContent = content ? EditorState.createWithContent(convertFromRaw(JSON.parse(content))) : EditorState.createEmpty()
+  const initialContent = content
+    ? EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
+    : EditorState.createEmpty()
   const [editorState, setEditorState] = useState(initialContent)
 
   const handleKeyCommand = (command) => {
@@ -57,12 +61,13 @@ const TextEditor = () => {
       setEditorState(RichUtils.toggleLink(editorState, selection, null))
       return 'handled'
     }
-    const content = editorState.getCurrentContent()
-    const contentWithEntity = content.createEntity('LINK', 'MUTABLE', { url: link })
+    const currentContent = editorState.getCurrentContent()
+    const contentWithEntity = currentContent.createEntity('LINK', 'MUTABLE', { url: link })
     const newEditorState = EditorState.push(editorState, contentWithEntity, 'create-entity')
     const entityKey = contentWithEntity.getLastCreatedEntityKey()
 
     setEditorState(RichUtils.toggleLink(newEditorState, selection, entityKey))
+    return null
   }
 
   const onSave = () => {

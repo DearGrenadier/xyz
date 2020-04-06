@@ -2,7 +2,7 @@ import React from 'react';
 import {
   RichUtils,
   KeyBindingUtil,
-  EditorState,
+  EditorState
 } from 'draft-js'
 
 export const linkStrategy = (contentBlock, callback, contentState) => {
@@ -14,12 +14,15 @@ export const linkStrategy = (contentBlock, callback, contentState) => {
         && contentState.getEntity(entityKey).getType() === 'LINK'
       )
     },
-    callback,
+    callback
   )
 }
 
 export const Link = (props) => {
-  const { contentState, entityKey } = props;
+  // eslint-disable-next-line react/prop-types
+  const { contentState, entityKey, children } = props;
+
+  // eslint-disable-next-line react/prop-types
   const { url } = contentState.getEntity(entityKey).getData();
   return (
     <a
@@ -29,7 +32,7 @@ export const Link = (props) => {
       target="_blank"
       aria-label={url}
     >
-      {props.children}
+      {children}
     </a>
   );
 }
@@ -42,6 +45,7 @@ const addLinkPluginPlugin = {
       return;
     }
     if (KeyBindingUtil.hasCommandModifier(event) && event.which === 75) {
+      // eslint-disable-next-line consistent-return
       return 'ADD_LINK';
     }
   },
@@ -58,12 +62,12 @@ const addLinkPluginPlugin = {
     }
     const content = editorState.getCurrentContent();
     const contentWithEntity = content.createEntity('LINK', 'MUTABLE', {
-      url: link,
+      url: link
     });
     const newEditorState = EditorState.push(
       editorState,
       contentWithEntity,
-      'create-entity',
+      'create-entity'
     );
     const entityKey = contentWithEntity.getLastCreatedEntityKey();
     setEditorState(RichUtils.toggleLink(newEditorState, selection, entityKey));
@@ -73,9 +77,9 @@ const addLinkPluginPlugin = {
   decorators: [
     {
       strategy: linkStrategy,
-      component: Link,
-    },
-  ],
+      component: Link
+    }
+  ]
 }
 
 export default addLinkPluginPlugin

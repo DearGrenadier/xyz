@@ -1,11 +1,11 @@
 import posts, { postConstants } from './posts'
 
 const actions = {
-  ...posts,
+  ...posts
 }
 
 export const constants = {
-  posts: postConstants,
+  posts: postConstants
 }
 
 export default actions

@@ -3,7 +3,7 @@ import List from './List'
 
 const Posts = {
   List,
-  New,
+  New
 }
 
 export default Posts

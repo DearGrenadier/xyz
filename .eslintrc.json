@@ -23,7 +23,15 @@
     ],
     "rules": {
         "semi": 0,
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "comma-dangle": ["error", "never"]
     },
-    "ignorePatterns": ["src/serviceWorker.js", "src/setupWorker.js"]
+    "ignorePatterns": ["src/serviceWorker.js", "src/setupWorker.js", "build/**/*.js"],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": ["src"]
+            }
+        }
+    }
 }
