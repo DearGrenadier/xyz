@@ -12,7 +12,7 @@ const PostsList = () => {
 
   useEffect(() => {
     dispatch(actions.fetchPosts())
-  }, [])
+  }, [dispatch])
 
   return (
     <>
