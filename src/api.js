@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const HOST = process.env.API_APP_HOST || 'http://0.0.0.0:8080'
+const HOST = process.env.REACT_APP_API_HOST || 'http://0.0.0.0:8080'
 
 const client = axios.create({
   baseURL: HOST,
