@@ -1,15 +1,12 @@
 import { createActions } from 'redux-actions'
+import { createRequestConstants } from 'helpers'
 
 export const postConstants = {
-  FETCH_POSTS: 'FETCH_POSTS',
-  POSTS_REQUEST_PENDING: 'POSTS_REQUEST_PENDING',
-  POSTS_REQUEST_SUCCESS: 'POSTS_REQUEST_SUCCESS',
-  POSTS_REQUEST_ERROR: 'POSTS_REQUEST_ERROR'
+  ...createRequestConstants('POSTS_GET_LIST'),
+  ...createRequestConstants('POSTS_CREATE'),
+  ...createRequestConstants('POSTS_GET_ITEM'),
+  ...createRequestConstants('POSTS_UPDATE'),
+  ...createRequestConstants('POSTS_DELETE')
 }
 
-export default createActions(
-  postConstants.FETCH_POSTS,
-  postConstants.POSTS_REQUEST_PENDING,
-  postConstants.POSTS_REQUEST_SUCCESS,
-  postConstants.POSTS_REQUEST_ERROR
-)
+export default createActions(...Object.keys(postConstants))

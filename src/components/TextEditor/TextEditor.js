@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import {
-  EditorState, RichUtils, convertToRaw, convertFromRaw
+  EditorState, RichUtils, convertFromRaw
 } from 'draft-js'
 import Editor from 'draft-js-plugins-editor'
-
 import styled from 'styled-components'
 import {
-  Icon, Button
+  Icon
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import './styles.css'
 
@@ -22,13 +22,14 @@ const plugins = [
   addLinkPlugin
 ]
 
-const TextEditor = () => {
-  const content = window.localStorage.getItem('content')
+const TextEditor = React.forwardRef((props, ref) => {
+  const { initialContent } = props
 
-  const initialContent = content
-    ? EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
+  const content = initialContent
+    ? EditorState.createWithContent(convertFromRaw(JSON.parse(initialContent)))
     : EditorState.createEmpty()
-  const [editorState, setEditorState] = useState(initialContent)
+
+  const [editorState, setEditorState] = useState(content)
 
   const handleKeyCommand = (command) => {
     const newState = RichUtils.handleKeyCommand(editorState, command)
@@ -70,22 +71,17 @@ const TextEditor = () => {
     return null
   }
 
-  const onSave = () => {
-    const contentState = editorState.getCurrentContent()
-    window.localStorage.setItem('content', JSON.stringify(convertToRaw(contentState)))
-  }
-
   return (
     <>
       <Toolbar>
-        <Icon icon="bold" onClick={onBoldClick} />
-        <Icon icon="italic" onClick={onItalicClick} />
-        <Icon icon="underline" onClick={onUnderlineClick} />
-        <Icon icon="link" onClick={onAddLink} />
-        <Button icon="saved" intent="primary" onClick={onSave}>Save</Button>
+        <Icon icon={IconNames.BOLD} onClick={onBoldClick} />
+        <Icon icon={IconNames.ITALIC} onClick={onItalicClick} />
+        <Icon icon={IconNames.UNDERLINE} onClick={onUnderlineClick} />
+        <Icon icon={IconNames.LINK} onClick={onAddLink} />
       </Toolbar>
 
       <Editor
+        ref={ref}
         editorState={editorState}
         onChange={setEditorState}
         handleKeyCommand={handleKeyCommand}
@@ -94,6 +90,6 @@ const TextEditor = () => {
       />
     </>
   )
-}
+})
 
 export default TextEditor

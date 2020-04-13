@@ -7,10 +7,17 @@ const client = axios.create({
   timeout: 3000
 })
 
-const get = (path, params) => () => client.get(path, { params })
+const get = (path) => (params) => client.get(path, { params })
+const post = (path) => (params) => client.post(path, params)
+const put = (path) => (params) => client.put(path, params)
+const destroy = (path) => client.delete(path)
 
 const API = {
-  postsGetCollection: get('/posts')
+  postsGetList: get('/posts'),
+  postsCreate: post('/posts'),
+  postsGetItem: (id) => get(`/posts/${id}`)(),
+  postsUpdate: (id, params) => put(`/posts/${id}`)(params),
+  postsDelete: (id) => destroy(`/posts/${id}`)
 }
 
 export default API

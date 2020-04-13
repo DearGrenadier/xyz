@@ -1,10 +1,19 @@
-import React from 'react';
-import TextEditor from '../../components/TextEditor';
+import React from 'react'
+import { useDispatch } from 'react-redux'
 
-const PostsNew = () => (
-  <>
-    <TextEditor />
-  </>
-)
+import actions from 'actions'
+import PostForm from 'components/PostForm'
+
+const PostsNew = () => {
+  const dispatch = useDispatch()
+
+  const onSave = (params) => {
+    dispatch(actions.postsCreate(params))
+  }
+
+  return (
+    <PostForm onSave={onSave} />
+  )
+}
 
 export default PostsNew
