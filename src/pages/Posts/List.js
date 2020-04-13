@@ -24,6 +24,7 @@ const PostsList = () => {
 
   useEffect(() => {
     dispatch(actions.postsGetList())
+  // eslint-disable-next-line
   }, [])
 
   const onNewClick = () => dispatch(push('/admin/posts/new'))
