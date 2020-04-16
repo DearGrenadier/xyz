@@ -12,7 +12,7 @@ const PageWrapper = styled('div')`
 `
 const StyledNavbar = styled(Navbar)`
   margin-top: 2px;
-  width: 40vw;
+  width: 42vw;
 `
 
 export default ({ children }) => {

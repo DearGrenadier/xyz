@@ -8,5 +8,8 @@ div.DraftEditor-root {
 }
 div.DraftEditor-editorContainer,
 div.public-DraftEditor-content {
+  padding: 4px;
   height: 100%;
+  font-family: 'Palatino';
+  font-size: 21px;
 }

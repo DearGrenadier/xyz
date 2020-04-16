@@ -6,6 +6,12 @@ import { IconNames } from '@blueprintjs/icons'
 
 import AdminPageWrapper from 'components/AdminPageWrapper'
 import ButtonsPanel from 'components/ButtonsPanel'
+import styled from 'styled-components'
+
+const StyledInputGroup = styled(InputGroup)`
+  flex: 1;
+  margin-right: 8px;
+`
 
 export default ({ onSave, initialContent, title }) => {
   const textEditorRef = useRef(null)
@@ -26,7 +32,7 @@ export default ({ onSave, initialContent, title }) => {
   return (
     <AdminPageWrapper>
       <ButtonsPanel>
-        <InputGroup
+        <StyledInputGroup
           value={titleValue}
           leftIcon={IconNames.ANNOTATION}
           onChange={handleTitleChange}

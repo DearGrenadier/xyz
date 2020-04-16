@@ -26,7 +26,6 @@ export default () => {
     }))
   }
 
-
   if (!post.id || isProcessing) return null
 
   return (

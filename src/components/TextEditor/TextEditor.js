@@ -3,23 +3,20 @@ import {
   EditorState, RichUtils, convertFromRaw
 } from 'draft-js'
 import Editor from 'draft-js-plugins-editor'
-import styled from 'styled-components'
-import {
-  Icon
-} from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
-
-import './styles.css'
+import createImagePlugin from 'draft-js-image-plugin'
+// import createLinkPlugin from 'draft-js-anchor-plugin'
+import Toolbar from './Toolbar'
 
 import addLinkPlugin from './plugins/addLinkPlugin'
 
-const Toolbar = styled('div')`
-  width: 40vw;
-  margin: auto;
-`
+import './styles.css'
+
+const imagePlugin = createImagePlugin()
+const linkPlugin = addLinkPlugin
 
 const plugins = [
-  addLinkPlugin
+  linkPlugin,
+  imagePlugin
 ]
 
 const TextEditor = React.forwardRef((props, ref) => {
@@ -43,42 +40,13 @@ const TextEditor = React.forwardRef((props, ref) => {
     return 'not-handled'
   }
 
-  const onBoldClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'))
-  }
-
-  const onItalicClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, 'ITALIC'))
-  }
-
-  const onUnderlineClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'))
-  }
-
-  const onAddLink = () => {
-    const selection = editorState.getSelection()
-    const link = window.prompt('Paste the link')
-    if (!link) {
-      setEditorState(RichUtils.toggleLink(editorState, selection, null))
-      return 'handled'
-    }
-    const currentContent = editorState.getCurrentContent()
-    const contentWithEntity = currentContent.createEntity('LINK', 'MUTABLE', { url: link })
-    const newEditorState = EditorState.push(editorState, contentWithEntity, 'create-entity')
-    const entityKey = contentWithEntity.getLastCreatedEntityKey()
-
-    setEditorState(RichUtils.toggleLink(newEditorState, selection, entityKey))
-    return null
-  }
-
   return (
     <>
-      <Toolbar>
-        <Icon icon={IconNames.BOLD} onClick={onBoldClick} />
-        <Icon icon={IconNames.ITALIC} onClick={onItalicClick} />
-        <Icon icon={IconNames.UNDERLINE} onClick={onUnderlineClick} />
-        <Icon icon={IconNames.LINK} onClick={onAddLink} />
-      </Toolbar>
+      <Toolbar
+        editorState={editorState}
+        setEditorState={setEditorState}
+        imagePlugin={imagePlugin}
+      />
 
       <Editor
         ref={ref}
