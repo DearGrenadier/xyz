@@ -17,6 +17,12 @@ const Router = () => (
       <Route exact path="/">
         <Pages.Home />
       </Route>
+      <Route path="/posts">
+        <Pages.Posts.List />
+      </Route>
+      <Route path="/posts/:id">
+        <Pages.Posts.Show />
+      </Route>
       <Route exact path="/admin">
         <Pages.AdminHome />
       </Route>
@@ -27,7 +33,7 @@ const Router = () => (
         <Pages.Posts.Edit />
       </Route>
       <Route path="/admin/posts">
-        <Pages.Posts.List />
+        <Pages.Posts.AdminList />
       </Route>
     </Switch>
   </ConnectedRouter>

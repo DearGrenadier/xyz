@@ -1,24 +1,51 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { push } from 'connected-react-router'
-import { Button } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
 import styled from 'styled-components'
 
 import actions from 'actions'
-import PostItem from 'components/PostItem'
-import AdminPageWrapper from 'components/AdminPageWrapper'
+import PageWrapper from 'components/PageWrapper'
 
-const ButtonsPanel = styled('div')`
+const PostsList = styled('div')`
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  width: 40vw;
+  flex-direction: column;
+  margin-top: 64px;
+  max-width: 630px;
+  margin-left: auto;
+  margin-right: auto;
+`
+const PostItemWrapper = styled('article')`
   margin-top: 36px;
-  margin-bottom: 24px;
 `
 
-const PostsList = () => {
+const Title = styled('header')`
+
+`
+const TitleLink = styled('a')`
+  color: #77e577;
+  font-size: 24px;
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+`
+
+const CreatedAt = styled('small')`
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 12px;
+  margin-top: 4px;
+`
+
+const PostItem = ({ post }) => (
+  <PostItemWrapper>
+    <Title>
+      <TitleLink href={`/posts/${post.id}`}>{post.title}</TitleLink>
+    </Title>
+    <CreatedAt>
+      {post.createdAt}
+    </CreatedAt>
+
+  </PostItemWrapper>
+)
+
+export default () => {
   const dispatch = useDispatch()
   const posts = useSelector((state) => state.postsList.data)
 
@@ -27,16 +54,11 @@ const PostsList = () => {
   // eslint-disable-next-line
   }, [])
 
-  const onNewClick = () => dispatch(push('/admin/posts/new'))
-
   return (
-    <AdminPageWrapper>
-      <ButtonsPanel>
-        <Button icon={IconNames.PLUS} text="New Post" intent="primary" onClick={onNewClick} />
-      </ButtonsPanel>
-      {posts.map((post) => <PostItem key={post.id} post={post} />)}
-    </AdminPageWrapper>
+    <PageWrapper>
+      <PostsList>
+        {posts.map((post) => <PostItem key={post.id} post={post} />)}
+      </PostsList>
+    </PageWrapper>
   )
 }
-
-export default PostsList

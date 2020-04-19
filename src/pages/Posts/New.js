@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import actions from 'actions'
 import PostForm from 'components/PostForm'
+import AdminPageWrapper from 'components/AdminPageWrapper'
 
 const PostsNew = () => {
   const dispatch = useDispatch()
@@ -12,7 +13,9 @@ const PostsNew = () => {
   }
 
   return (
-    <PostForm onSave={onSave} />
+    <AdminPageWrapper>
+      <PostForm onSave={onSave} />
+    </AdminPageWrapper>
   )
 }
 

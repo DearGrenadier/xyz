@@ -1,6 +1,10 @@
-@font-face {
-  font-family: 'Palatino';
-  font-style: normal;
-  font-weight: 400;
-  src: url('./fonts/Palatino.ttf') format('ttf');
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+a, a:hover {
+  color: #000;
 }

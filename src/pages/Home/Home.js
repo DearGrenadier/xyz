@@ -1,9 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-const Home = () => (
-  <div>
-    Home
-  </div>
+import PageWrapper from 'components/PageWrapper'
+
+export default () => (
+  <PageWrapper />
 )
-
-export default Home

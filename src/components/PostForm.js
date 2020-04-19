@@ -4,7 +4,6 @@ import { Button, InputGroup } from '@blueprintjs/core'
 import { convertToRaw } from 'draft-js'
 import { IconNames } from '@blueprintjs/icons'
 
-import AdminPageWrapper from 'components/AdminPageWrapper'
 import ButtonsPanel from 'components/ButtonsPanel'
 import styled from 'styled-components'
 
@@ -30,7 +29,7 @@ export default ({ onSave, initialContent, title }) => {
   const handleTitleChange = (event) => setTitleValue(event.target.value)
 
   return (
-    <AdminPageWrapper>
+    <>
       <ButtonsPanel>
         <StyledInputGroup
           value={titleValue}
@@ -41,6 +40,6 @@ export default ({ onSave, initialContent, title }) => {
         <Button icon="saved" intent="primary" onClick={onSaveClick} text="Save" />
       </ButtonsPanel>
       <TextEditor ref={textEditorRef} initialContent={initialContent} />
-    </AdminPageWrapper>
+    </>
   )
 }
