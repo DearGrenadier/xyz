@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import logo from 'images/logo.svg'
 import device from 'config/size'
 import Footer from 'components/Footer'
+import PseudoLink from 'components/PseudoLink'
 
 
 const PageWrapper = styled('div')`
@@ -25,7 +26,7 @@ const Header = styled('nav')`
   }
 `
 
-const HomeLink = styled('a')`
+const HomeLink = styled(PseudoLink)`
   margin: 0 24px;
 
   @media ${device.mobile} {
@@ -33,7 +34,7 @@ const HomeLink = styled('a')`
   }
 `
 
-const MenuLink = styled('a')`
+const MenuLink = styled(PseudoLink)`
   font-size: 20px;
   font-family: 'Montserrat';
   font-weight: bold;
@@ -126,10 +127,10 @@ export default ({ children }) => {
         </Hamburger>
       </Header>
       <MobileMenu show={showMobileMenu}>
-        <MenuLink href="/posts" show>
+        <MenuLink href="/posts" show="true">
           Posts
         </MenuLink>
-        <MenuLink href="/cv" show>
+        <MenuLink href="/cv" show="true">
           CV
         </MenuLink>
       </MobileMenu>
