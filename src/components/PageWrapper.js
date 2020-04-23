@@ -38,6 +38,7 @@ const MenuLink = styled('a')`
   font-family: 'Montserrat';
   font-weight: bold;
   color: #000;
+  flex: 1;
 
   :hover {
     color: #77e577;
@@ -108,7 +109,7 @@ export default ({ children }) => {
   return (
     <PageWrapper>
       <Header role="navigation">
-        <MenuLink href="/posts">
+        <MenuLink href="/posts" style={{ textAlign: 'right' }}>
           Posts
         </MenuLink>
         <HomeLink href="/">

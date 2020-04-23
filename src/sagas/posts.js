@@ -4,10 +4,10 @@ import { push } from 'connected-react-router'
 import API from 'api'
 import actions, { constants } from 'actions'
 
-function* fetchPosts() {
+function* fetchPosts({ payload }) {
   try {
     yield put(actions.postsGetListRequestPending())
-    const response = yield call(API.postsGetList)
+    const response = yield call(API.postsGetList, payload)
     yield put(actions.postsGetListRequestSuccess(response.data))
   } catch (error) {
     yield put(actions.postsGetListRequestFailure(error))

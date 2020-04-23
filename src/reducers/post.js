@@ -3,7 +3,7 @@ import { constants } from 'actions'
 
 const defaultState = { data: {}, processing: false, error: null }
 
-const postReducer = handleActions({
+export default handleActions({
   [combineActions(
     constants.posts.POSTS_CREATE_REQUEST_PENDING,
     constants.posts.POSTS_GET_ITEM_REQUEST_PENDING,
@@ -24,5 +24,3 @@ const postReducer = handleActions({
     ...state, processing: false, error: payload
   })
 }, defaultState)
-
-export default postReducer

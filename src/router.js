@@ -7,7 +7,9 @@ import {
 import { ConnectedRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 
-import Pages from './pages'
+import ProtectedRoute from 'components/ProtectedRoute'
+import Pages from 'pages'
+
 
 export const history = createBrowserHistory()
 
@@ -23,18 +25,18 @@ const Router = () => (
       <Route path="/posts/:id">
         <Pages.Posts.Show />
       </Route>
-      <Route exact path="/admin">
+      <ProtectedRoute exact path="/admin">
         <Pages.AdminHome />
-      </Route>
-      <Route path="/admin/posts/new">
+      </ProtectedRoute>
+      <ProtectedRoute path="/admin/posts/new">
         <Pages.Posts.New />
-      </Route>
-      <Route path="/admin/posts/:id/edit">
+      </ProtectedRoute>
+      <ProtectedRoute path="/admin/posts/:id/edit">
         <Pages.Posts.Edit />
-      </Route>
-      <Route path="/admin/posts">
+      </ProtectedRoute>
+      <ProtectedRoute path="/admin/posts">
         <Pages.Posts.AdminList />
-      </Route>
+      </ProtectedRoute>
     </Switch>
   </ConnectedRouter>
 )

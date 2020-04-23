@@ -50,7 +50,7 @@ export default () => {
   const posts = useSelector((state) => state.postsList.data)
 
   useEffect(() => {
-    dispatch(actions.postsGetList())
+    dispatch(actions.postsGetList({ status: 'published' }))
   // eslint-disable-next-line
   }, [])
 

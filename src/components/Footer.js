@@ -15,7 +15,7 @@ const Footer = styled('footer')`
   justify-content: center;
 
   svg {
-    margin-right: 8px;
+    margin: 0 4px;
   }
 `
 
@@ -30,7 +30,7 @@ export default () => (
   <Footer>
     {Object.entries(links).map(
       ([link, icon]) => (
-        <a href={link} target="_blank" rel="noopener noreferrer">
+        <a href={link} target="_blank" rel="noopener noreferrer" key={link}>
           <FontAwesomeIcon icon={icon} size="2x" />
         </a>
       )

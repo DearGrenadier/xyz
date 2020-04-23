@@ -3,7 +3,7 @@ import { constants } from 'actions'
 
 const defaultState = { data: [], processing: false, error: null }
 
-const postsListReducer = handleActions({
+export default handleActions({
   [combineActions(
     constants.posts.POSTS_GET_LIST_REQUEST_PENDING,
     constants.posts.POSTS_UPDATE_REQUEST_PENDING,
@@ -36,5 +36,3 @@ const postsListReducer = handleActions({
     ...state, processing: false, error: payload
   })
 }, defaultState)
-
-export default postsListReducer
