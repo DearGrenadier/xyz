@@ -32,6 +32,10 @@ const HomeLink = styled(PseudoLink)`
   @media ${device.mobile} {
     margin: 0;
   }
+
+  img {
+    pointer-events: none;
+  }
 `
 
 const MenuLink = styled(PseudoLink)`
