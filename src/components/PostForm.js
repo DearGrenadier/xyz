@@ -10,6 +10,11 @@ import styled from 'styled-components'
 const StyledInputGroup = styled(InputGroup)`
   flex: 1;
   margin-right: 8px;
+  input {
+    font-size: 18px;
+    font-family: 'Montserrat';
+    font-weight: bold;
+  }
 `
 
 export default ({ onSave, initialContent, title }) => {
@@ -39,7 +44,11 @@ export default ({ onSave, initialContent, title }) => {
         />
         <Button icon="saved" intent="primary" onClick={onSaveClick} text="Save" />
       </ButtonsPanel>
-      <TextEditor ref={textEditorRef} initialContent={initialContent} />
+      <TextEditor
+        ref={textEditorRef}
+        initialContent={initialContent}
+        showToolbar
+      />
     </>
   )
 }

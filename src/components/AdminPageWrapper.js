@@ -11,7 +11,7 @@ const PageWrapper = styled('div')`
   align-items: center;
 `
 const StyledNavbar = styled(Navbar)`
-  margin-top: 2px;
+  margin-top: 4px;
   width: 42vw;
 `
 
@@ -22,6 +22,11 @@ export default ({ children }) => {
     <PageWrapper>
       <StyledNavbar>
         <Navbar.Group>
+          <Button
+            minimal
+            onClick={() => dispatch(push('/'))}
+            icon={IconNames.HOME}
+          />
           <Button
             minimal
             text="Posts"

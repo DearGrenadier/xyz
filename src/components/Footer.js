@@ -13,6 +13,8 @@ const Footer = styled('footer')`
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: #fff;
 
   svg {
     margin: 0 4px;

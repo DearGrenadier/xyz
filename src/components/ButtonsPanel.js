@@ -5,6 +5,6 @@ export default styled('div')`
   flex-direction: row;
   justify-content: space-between;
   width: 40vw;
-  margin-top: 36px;
-  margin-bottom: 24px;
+  margin-top: 24px;
+  margin-bottom: 12px;
 `

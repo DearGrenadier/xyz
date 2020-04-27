@@ -1,15 +1,19 @@
 div.DraftEditor-root {
-  border: 1px solid #ccc;
   background-color: #fff;
-  height: 80vh;
-  width: 40vw;
-  margin: auto;
-  overflow-y: auto;
+  min-height: 500px;
+  margin-bottom: 36px;
+  max-width: 768px;
 }
 div.DraftEditor-editorContainer,
 div.public-DraftEditor-content {
-  padding: 4px;
   height: 100%;
-  font-family: 'Palatino';
-  font-size: 21px;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: 'Merriweather';
+}
+ul {
+  padding-left: 12px;
+}
+ul li {
+  margin-bottom: 8px;
 }

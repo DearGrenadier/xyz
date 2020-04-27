@@ -19,7 +19,7 @@ const Router = () => (
       <Route exact path="/">
         <Pages.Home />
       </Route>
-      <Route path="/posts">
+      <Route exact path="/posts">
         <Pages.Posts.List />
       </Route>
       <Route path="/posts/:id">

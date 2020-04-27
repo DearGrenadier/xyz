@@ -4,33 +4,39 @@ import styled from 'styled-components'
 
 import actions from 'actions'
 import PageWrapper from 'components/PageWrapper'
+import PseudoLink from 'components/PseudoLink'
 
 const PostsList = styled('div')`
   display: flex;
   flex-direction: column;
-  margin-top: 64px;
   max-width: 630px;
   margin-left: auto;
   margin-right: auto;
 `
 const PostItemWrapper = styled('article')`
-  margin-top: 36px;
+  margin-top: 32px;
+
+  :first-child {
+    margin-top: 28px;
+  }
 `
 
 const Title = styled('header')`
 
 `
-const TitleLink = styled('a')`
+const TitleLink = styled(PseudoLink)`
   color: #77e577;
-  font-size: 24px;
-  font-family: Montserrat, sans-serif;
+  font-size: 28px;
+  font-family: Montserrat;
   font-weight: bold;
 `
 
-const CreatedAt = styled('small')`
-  font-family: 'Merriweather Sans', sans-serif;
+const LastTimeUpdated = styled('small')`
+  font-family: 'Merriweather';
   font-size: 12px;
   margin-top: 4px;
+  font-style: italic;
+  display: block;
 `
 
 const PostItem = ({ post }) => (
@@ -38,10 +44,9 @@ const PostItem = ({ post }) => (
     <Title>
       <TitleLink href={`/posts/${post.id}`}>{post.title}</TitleLink>
     </Title>
-    <CreatedAt>
-      {post.createdAt}
-    </CreatedAt>
-
+    <LastTimeUpdated>
+      {`Last time updated at: ${post.updatedAt}`}
+    </LastTimeUpdated>
   </PostItemWrapper>
 )
 

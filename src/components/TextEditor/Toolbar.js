@@ -1,22 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Icon, ButtonGroup, Button
 } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 import styled from 'styled-components'
-import { RichUtils } from 'draft-js'
+import { RichUtils, EditorState } from 'draft-js'
 import EditorUtils from 'draft-js-plugins-utils'
+import { getSelectedBlocksList } from 'draftjs-utils'
 
 import ToolbarPopover from './ToolbarPopover'
 
 const Toolbar = styled('div')`
-  padding: 5px;
   width: 40vw;
-  margin: auto;
+  margin-bottom: 12px;
 `
 
-export default (props) => {
+export default React.forwardRef((props, ref) => {
   const { editorState, setEditorState, imagePlugin } = props
+  const [language, setLanguage] = useState('javascript')
 
   const onBoldClick = () => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'))
@@ -34,24 +35,44 @@ export default (props) => {
     setEditorState(EditorUtils.createLinkAtSelection(editorState, url))
   }
 
-  const onUnorderedClick = () => {
-    setEditorState(RichUtils.toggleBlockType(editorState, 'unordered-list-item'))
-  }
+  const onUnorderedClick = () => setEditorState(RichUtils.toggleBlockType(editorState, 'unordered-list-item'))
 
-  const onOrderedClick = () => {
-    setEditorState(RichUtils.toggleBlockType(editorState, 'ordered-list-item'))
-  }
+  const onOrderedClick = () => setEditorState(RichUtils.toggleBlockType(editorState, 'ordered-list-item'))
+
+  const onHeadingClick = () => setEditorState(RichUtils.toggleBlockType(editorState, 'header-two'))
 
   const onCodeBlockClick = () => {
-    setEditorState(RichUtils.toggleBlockType(editorState, 'code-block'))
+    const currentContent = editorState.getCurrentContent()
+    const blocks = getSelectedBlocksList(editorState)
+    let blockMap = currentContent.getBlockMap()
+
+    blocks.forEach((block) => {
+      const data = block.getData().merge({ language })
+      const newBlock = block.merge({ data, type: 'code-block' })
+      blockMap = blockMap.set(block.getKey(), newBlock)
+    })
+
+    const newContentState = currentContent.merge({ blockMap })
+
+    setEditorState(EditorState.push(editorState, newContentState, 'toggle-code-block'))
   }
 
+  const onLanguageChange = (event) => {
+    setLanguage(event.target.value)
+  }
+
+  const onUndoClick = () => setEditorState(EditorState.undo(editorState))
+  const onRedoClick = () => setEditorState(EditorState.redo(editorState))
+
   return (
-    <Toolbar>
+    <Toolbar ref={ref}>
       <ButtonGroup>
+        <Button icon={<Icon icon={IconNames.UNDO} />} onClick={onUndoClick} />
+        <Button icon={<Icon icon={IconNames.REDO} />} onClick={onRedoClick} />
         <Button icon={<Icon icon={IconNames.BOLD} />} onClick={onBoldClick} />
         <Button icon={<Icon icon={IconNames.ITALIC} />} onClick={onItalicClick} />
         <Button icon={<Icon icon={IconNames.UNDERLINE} />} onClick={onUnderlineClick} />
+        <Button icon={<Icon icon={IconNames.HEADER} />} onClick={onHeadingClick} />
         <ToolbarPopover
           contentText="Put image URL"
           onSubmit={(url) => setEditorState(imagePlugin.addImage(editorState, url))}
@@ -64,8 +85,14 @@ export default (props) => {
         />
         <Button icon={<Icon icon={IconNames.PROPERTIES} />} onClick={onUnorderedClick} />
         <Button icon={<Icon icon={IconNames.NUMBERED_LIST} />} onClick={onOrderedClick} />
+
+        <select value={language} onChange={onLanguageChange}>
+          <option value="javascript">Javascript</option>
+          <option value="css">CSS</option>
+        </select>
         <Button icon={<Icon icon={IconNames.CODE} />} onClick={onCodeBlockClick} />
+
       </ButtonGroup>
     </Toolbar>
   )
-}
+})
