@@ -33,6 +33,12 @@ export default ({ children }) => {
             onClick={() => dispatch(push('/admin/posts'))}
             icon={IconNames.MANUALLY_ENTERED_DATA}
           />
+          <Button
+            minimal
+            text="CVs"
+            onClick={() => dispatch(push('/admin/cvs'))}
+            icon={IconNames.DOCUMENT}
+          />
         </Navbar.Group>
       </StyledNavbar>
 

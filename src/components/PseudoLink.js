@@ -4,11 +4,12 @@ import React from 'react'
 import { push } from 'connected-react-router'
 import { useDispatch } from 'react-redux'
 
-
-export default ({ children, ...rest }) => {
+export default ({ children, target, ...rest }) => {
   const dispatch = useDispatch()
 
   const onClick = (event) => {
+    if (target === '_blank') return
+
     event.preventDefault()
     event.stopPropagation()
     dispatch(push(event.target.pathname))

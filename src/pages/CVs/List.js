@@ -5,27 +5,27 @@ import { Button } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
 import actions from 'actions'
-import AdminPostItem from 'components/AdminPostItem'
 import AdminPageWrapper from 'components/AdminPageWrapper'
 import ButtonsPanel from 'components/ButtonsPanel'
+import AdminCVItem from 'components/AdminCVItem'
 
 export default () => {
   const dispatch = useDispatch()
-  const posts = useSelector((state) => state.postsList.data)
+  const cvs = useSelector((state) => state.cvs.data)
 
   useEffect(() => {
-    dispatch(actions.postsGetList())
+    dispatch(actions.cvsGetList())
   // eslint-disable-next-line
   }, [])
 
-  const onNewClick = () => dispatch(push('/admin/posts/new'))
+  const onNewClick = () => dispatch(push('/admin/cvs/new'))
 
   return (
     <AdminPageWrapper>
       <ButtonsPanel>
-        <Button icon={IconNames.PLUS} text="New Post" intent="primary" onClick={onNewClick} />
+        <Button icon={IconNames.PLUS} text="New CV" intent="primary" onClick={onNewClick} />
       </ButtonsPanel>
-      {posts.map((post) => <AdminPostItem key={post.id} post={post} />)}
+      {cvs.map((cv) => <AdminCVItem key={cv.id} cv={cv} />)}
     </AdminPageWrapper>
   )
 }

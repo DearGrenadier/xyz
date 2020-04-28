@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 
 import logo from 'images/logo.svg'
 import device from 'config/size'
 import Footer from 'components/Footer'
 import PseudoLink from 'components/PseudoLink'
-
+import { useSelector, useDispatch } from 'react-redux'
+import actions from 'actions'
 
 const PageWrapper = styled('div')`
   margin-left: auto;
@@ -110,6 +111,14 @@ const MobileMenu = styled('nav')`
 
 export default ({ children }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const dispatch = useDispatch()
+  const [cv] = useSelector((state) => state.cvs.data)
+  useEffect(() => {
+    if (!cv) {
+      dispatch(actions.cvsGetList({ limit: 1 }))
+    }
+  // eslint-disable-next-line
+  }, [])
 
   return (
     <PageWrapper>
@@ -120,7 +129,7 @@ export default ({ children }) => {
         <HomeLink href="/">
           <img src={logo} alt="logo" />
         </HomeLink>
-        <MenuLink href="/cv">
+        <MenuLink href={cv && cv.fileUrl} target="_blank">
           CV
         </MenuLink>
 

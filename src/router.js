@@ -37,6 +37,12 @@ const Router = () => (
       <ProtectedRoute path="/admin/posts">
         <Pages.Posts.AdminList />
       </ProtectedRoute>
+      <ProtectedRoute exact path="/admin/cvs">
+        <Pages.CVs.List />
+      </ProtectedRoute>
+      <ProtectedRoute path="/admin/cvs/new">
+        <Pages.CVs.New />
+      </ProtectedRoute>
     </Switch>
   </ConnectedRouter>
 )

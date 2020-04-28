@@ -22,7 +22,10 @@ const API = {
   postsGetItem: (id) => get(`/posts/${id}`)(),
   postsUpdate: (id, params) => put(`/posts/${id}`)(params),
   postsDelete: (id) => destroy(`/posts/${id}`),
-  authGet: get('/auth')
+  authGet: get('/auth'),
+  cvsGetList: (params) => get('/cvs')({ params }),
+  cvsCreate: post('/cvs'),
+  cvsDelete: (id) => destroy(`/cvs/${id}`)
 }
 
 export default API
