@@ -69,7 +69,7 @@ export default () => (
       </Paragraph>
       <Paragraph>
         Being a lover of reliability, I am passionate about testing and vulnerability fixing and do not consider that as a boring or tedious activity.
-        I do not consider myseld as genius software developer, but I really like to build projects and implement fresh ideas.
+        I do not consider myself as a genius software developer, but I really like to build projects and implement fresh ideas.
       </Paragraph>
       <Title>
         WORK APPROCHES
