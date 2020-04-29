@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
@@ -26,7 +27,7 @@ const Router = () => (
         <Pages.Posts.Show />
       </Route>
       <ProtectedRoute exact path="/admin">
-        <Pages.AdminHome />
+        <Redirect to="/admin/posts" />
       </ProtectedRoute>
       <ProtectedRoute path="/admin/posts/new">
         <Pages.Posts.New />

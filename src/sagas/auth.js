@@ -1,4 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
+import { push } from 'connected-react-router'
 
 import API from 'api'
 import actions, { constants } from 'actions'
@@ -12,6 +13,7 @@ function* getAuth({ payload }) {
     yield call([localStorage, 'setItem'], 'token', authString)
   } catch (error) {
     yield put(actions.authGetRequestFailure(error))
+    yield put(push('/'))
   }
 }
 
