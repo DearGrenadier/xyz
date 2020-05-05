@@ -78,7 +78,7 @@ export default ({ children }) => {
     if (!cv) {
       dispatch(actions.cvsGetList({ limit: 1 }))
     }
-  }, [])
+  }, [cv, dispatch])
 
   return (
     <PageWrapper>

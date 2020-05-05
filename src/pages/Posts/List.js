@@ -56,8 +56,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(actions.postsGetList({ status: 'published' }))
-  // eslint-disable-next-line
-  }, [])
+  }, [dispatch])
 
   return (
     <PageWrapper>

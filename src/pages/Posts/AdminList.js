@@ -15,8 +15,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(actions.postsGetList())
-  // eslint-disable-next-line
-  }, [])
+  }, [dispatch])
 
   const onNewClick = () => dispatch(push('/admin/posts/new'))
 

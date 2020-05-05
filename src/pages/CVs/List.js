@@ -15,8 +15,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(actions.cvsGetList())
-  // eslint-disable-next-line
-  }, [])
+  }, [dispatch])
 
   const onNewClick = () => dispatch(push('/admin/cvs/new'))
 

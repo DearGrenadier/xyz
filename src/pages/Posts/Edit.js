@@ -17,8 +17,7 @@ export default () => {
     if (parseInt(params.id, 10) !== post.id) {
       dispatch(actions.postsGetItem(params.id))
     }
-  // eslint-disable-next-line
-  }, [])
+  }, [dispatch, params.id, post.id])
 
   const onSave = (postParams) => {
     dispatch(actions.postsUpdate({

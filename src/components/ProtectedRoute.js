@@ -17,7 +17,7 @@ export default ({ children, ...rest }) => {
 
       dispatch(actions.authGet(credentials))
     }
-  }, [])
+  }, [dispatch, token])
 
   const render = () => token && children
 
