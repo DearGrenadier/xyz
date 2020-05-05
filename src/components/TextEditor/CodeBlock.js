@@ -5,11 +5,8 @@ const CodeBlock = styled('pre')`
   border-radius: 10px;
 `
 
-export default ({ children }) => {
-
-  return (
-    <CodeBlock className="language-">
-      {children}
-    </CodeBlock>
-  )
-}
+export default ({ children }) => (
+  <CodeBlock className="language-">
+    {children}
+  </CodeBlock>
+)

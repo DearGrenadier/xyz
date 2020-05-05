@@ -19,14 +19,16 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "rules": {
         "semi": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "comma-dangle": ["error", "never"],
         "react/prop-types": [0],
-        "react/jsx-props-no-spreading": [0]
+        "react/jsx-props-no-spreading": [0],
+        "react-hooks/exhaustive-deps": "warn"
     },
     "ignorePatterns": ["src/serviceWorker.js", "src/setupWorker.js", "build/**/*.js"],
     "settings": {

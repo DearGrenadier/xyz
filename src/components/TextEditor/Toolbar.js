@@ -19,27 +19,11 @@ export default React.forwardRef((props, ref) => {
   const { editorState, setEditorState, imagePlugin } = props
   const [language, setLanguage] = useState('javascript')
 
-  const onBoldClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'))
-  }
+  const onLinkSubmit = (url) => setEditorState(EditorUtils.createLinkAtSelection(editorState, url))
 
-  const onItalicClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, 'ITALIC'))
-  }
+  const toggleBlockType = (type) => setEditorState(RichUtils.toggleBlockType(editorState, type))
 
-  const onUnderlineClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'))
-  }
-
-  const onLinkSubmit = (url) => {
-    setEditorState(EditorUtils.createLinkAtSelection(editorState, url))
-  }
-
-  const onUnorderedClick = () => setEditorState(RichUtils.toggleBlockType(editorState, 'unordered-list-item'))
-
-  const onOrderedClick = () => setEditorState(RichUtils.toggleBlockType(editorState, 'ordered-list-item'))
-
-  const onHeadingClick = () => setEditorState(RichUtils.toggleBlockType(editorState, 'header-two'))
+  const toggleInlineStyle = (style) => setEditorState(RichUtils.toggleInlineStyle(editorState, style))
 
   const onCodeBlockClick = () => {
     const currentContent = editorState.getCurrentContent()
@@ -57,9 +41,7 @@ export default React.forwardRef((props, ref) => {
     setEditorState(EditorState.push(editorState, newContentState, 'toggle-code-block'))
   }
 
-  const onLanguageChange = (event) => {
-    setLanguage(event.target.value)
-  }
+  const onLanguageChange = (event) => setLanguage(event.target.value)
 
   const onUndoClick = () => setEditorState(EditorState.undo(editorState))
   const onRedoClick = () => setEditorState(EditorState.redo(editorState))
@@ -69,10 +51,10 @@ export default React.forwardRef((props, ref) => {
       <ButtonGroup>
         <Button icon={<Icon icon={IconNames.UNDO} />} onClick={onUndoClick} />
         <Button icon={<Icon icon={IconNames.REDO} />} onClick={onRedoClick} />
-        <Button icon={<Icon icon={IconNames.BOLD} />} onClick={onBoldClick} />
-        <Button icon={<Icon icon={IconNames.ITALIC} />} onClick={onItalicClick} />
-        <Button icon={<Icon icon={IconNames.UNDERLINE} />} onClick={onUnderlineClick} />
-        <Button icon={<Icon icon={IconNames.HEADER} />} onClick={onHeadingClick} />
+        <Button icon={<Icon icon={IconNames.BOLD} />} onClick={() => toggleInlineStyle('BOLD')} />
+        <Button icon={<Icon icon={IconNames.ITALIC} />} onClick={() => toggleInlineStyle('ITALIC')} />
+        <Button icon={<Icon icon={IconNames.UNDERLINE} />} onClick={() => toggleInlineStyle('UNDERLINE')} />
+        <Button icon={<Icon icon={IconNames.HEADER} />} onClick={() => toggleBlockType('header-two')} />
         <ToolbarPopover
           contentText="Put image URL"
           onSubmit={(url) => setEditorState(imagePlugin.addImage(editorState, url))}
@@ -83,8 +65,8 @@ export default React.forwardRef((props, ref) => {
           onSubmit={onLinkSubmit}
           icon={IconNames.LINK}
         />
-        <Button icon={<Icon icon={IconNames.PROPERTIES} />} onClick={onUnorderedClick} />
-        <Button icon={<Icon icon={IconNames.NUMBERED_LIST} />} onClick={onOrderedClick} />
+        <Button icon={<Icon icon={IconNames.PROPERTIES} />} onClick={() => toggleBlockType('unordered-list-item')} />
+        <Button icon={<Icon icon={IconNames.NUMBERED_LIST} />} onClick={() => toggleBlockType('ordered-list-item')} />
 
         <select value={language} onChange={onLanguageChange}>
           <option value="javascript">Javascript</option>

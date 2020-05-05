@@ -6,7 +6,7 @@ import Immutable from 'immutable'
 import Editor from 'draft-js-plugins-editor'
 import createImagePlugin from 'draft-js-image-plugin'
 import Prism from 'prismjs';
-import createPrismPlugin from 'draft-js-prism-plugin';
+import createPrismPlugin from 'draft-js-prism-plugin'
 import 'prismjs/themes/prism-okaidia.css'
 
 import Toolbar from './Toolbar'

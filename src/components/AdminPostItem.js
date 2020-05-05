@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import {
   ButtonGroup,
   Button,
-  Card,
   Elevation,
   H4,
   Colors,
@@ -15,11 +14,7 @@ import { IconNames } from '@blueprintjs/icons'
 import styled from 'styled-components'
 
 import actions from 'actions'
-
-const StyledCard = styled(Card)`
-  width: 40vw;
-  margin-bottom: 14px;
-`
+import AdminStyledCard from 'components/AdminStyledCard'
 
 const StatusButton = styled(Button)`
   color: ${(props) => (props.isPublished ? Colors.ORANGE3 : Colors.GREEN3)} !important;
@@ -56,7 +51,7 @@ export default ({ post }) => {
   const onDeleteClick = () => dispatch(actions.postsDelete(post.id))
 
   return (
-    <StyledCard elevation={Elevation.ONE}>
+    <AdminStyledCard elevation={Elevation.ONE}>
       <H4><Link to={`/posts/${post.id}`}>{post.title}</Link></H4>
       <ButtonGroup minimal>
         <StatusButton
@@ -79,6 +74,6 @@ export default ({ post }) => {
           onClick={onDeleteClick}
         />
       </ButtonGroup>
-    </StyledCard>
+    </AdminStyledCard>
   )
 }

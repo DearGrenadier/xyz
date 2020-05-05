@@ -17,7 +17,6 @@ export default ({ children, ...rest }) => {
 
       dispatch(actions.authGet(credentials))
     }
-  // eslint-disable-next-line
   }, [])
 
   const render = () => token && children

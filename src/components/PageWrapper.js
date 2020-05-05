@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
+import { useSelector, useDispatch } from 'react-redux'
 
 import logo from 'images/logo.svg'
 import device from 'config/size'
 import Footer from 'components/Footer'
 import PseudoLink from 'components/PseudoLink'
-import { useSelector, useDispatch } from 'react-redux'
 import actions from 'actions'
+import Hamburger from 'components/Hamburger'
 
 const PageWrapper = styled('div')`
   margin-left: auto;
@@ -56,47 +57,6 @@ const MenuLink = styled(PseudoLink)`
   }
 `
 
-const Hamburger = styled('div')`
-  display: none;
-
-  @media ${device.mobile} {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 50px;
-    width: 50px;
-    border-radius: 5px;
-    border: 4px solid #000;
-    background: #77e577;
-    position: relative;
-  }
-`
-
-const Stroke = styled('span')`
-  display: block;
-  border-radius: 2px;
-  background: #000;
-  height: 4px;
-  ${({ showMobileMenu }) => (showMobileMenu ? css`width: 40px;` : css`width: 32px;`)}
-  ${({ showMobileMenu }) => !showMobileMenu && css`margin-bottom: 4px;`}
-  ${({ showMobileMenu }) => showMobileMenu && css`position: absolute;`}
-
-  :first-child {
-    ${({ showMobileMenu }) => !showMobileMenu && css`margin-top: 11px;`}
-    ${({ showMobileMenu }) => showMobileMenu && css`top: 19px;`}
-    ${({ showMobileMenu }) => showMobileMenu && css`transform: rotate(45deg);`}
-  }
-
-  :nth-child(2) {
-    ${({ showMobileMenu }) => showMobileMenu && css`display: none;`}
-  }
-
-  :last-child {
-    ${({ showMobileMenu }) => showMobileMenu && css`top: 19px;`}
-    ${({ showMobileMenu }) => showMobileMenu && css`transform: rotate(-45deg);`}
-  }
-`
-
 const MobileMenu = styled('nav')`
   display: none;
 
@@ -113,11 +73,11 @@ export default ({ children }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const dispatch = useDispatch()
   const [cv] = useSelector((state) => state.cvs.data)
+
   useEffect(() => {
     if (!cv) {
       dispatch(actions.cvsGetList({ limit: 1 }))
     }
-  // eslint-disable-next-line
   }, [])
 
   return (
@@ -133,11 +93,7 @@ export default ({ children }) => {
           CV
         </MenuLink>
 
-        <Hamburger onClick={() => setShowMobileMenu(!showMobileMenu)}>
-          <Stroke showMobileMenu={showMobileMenu} />
-          <Stroke showMobileMenu={showMobileMenu} />
-          <Stroke showMobileMenu={showMobileMenu} />
-        </Hamburger>
+        <Hamburger onClick={() => setShowMobileMenu(!showMobileMenu)} />
       </Header>
       <MobileMenu show={showMobileMenu}>
         <MenuLink href="/posts" show="true">
